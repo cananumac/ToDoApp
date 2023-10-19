@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-7 mx-auto">
+      <h3 class="baslik p-3">{{getName()}} To Do List</h3>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="inputText"  (keyup.enter)="addItem(); ">
+        <button
+        [class]="getBtnClasses()"
+        class="btn" (click)="addItem();">Add</button>
+      </div>
+
+      <div class="form-check mb-3">
+        <input type="checkbox" [(ngModel)]="displayAll" class="form-check-input" name="" id="displayAll">
+        <label for="displayAll" class="form-check-label">Show All</label>
+      </div>
+
+      <div class="my-2">
+        {{displayCount()}} tasks completed.
+      </div>
+
+      <div class="alert alert-warning" *ngIf="getItems().length == 0 else itemsTable" >
+        There are no tasks to do!
+      </div>
+
+      <ng-template #itemsTable>
+
+        <table class="table mb-4" *ngIf="getItems().length > 0">
+          <thead>
+            <tr>
+              <th class="col">No</th>
+              <th class="col">Todo item</th>
+              <th class="col">Status</th>
+              <th class="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of getItems(); let i = index;">
+              <th>{{i+1}}</th>
+              <td>{{item.description}}</td>
+              <td>
+                <!-- {{item.status}} -->
+                <div [ngSwitch]="item.status">
+                  <div *ngSwitchCase="true">Yes</div>
+                  <div *ngSwitchDefault>No</div>
+                </div>
+              </td>
+              <td>
+                <input type="checkbox" (change)="onActionChanged(item)" class="ms-3" [(ngModel)]="item.status" name="" id="">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+.baslik{
+  margin-top: 3rem;
+  color: var(--main-text-color);
+  border-style: solid;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+td
+{
+  font-weight: bold;
+}
